@@ -60,7 +60,12 @@ To get a local copy up and running, follow these steps.
 
 In order to run this project you need:
 
--Commands: npm install
+-Commands:
+
+- bundle install
+- rails db:create
+- rails db:migrate
+- rails server
 
 ### Setup
 
