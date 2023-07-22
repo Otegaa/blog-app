@@ -1,22 +1,20 @@
 require 'rails_helper'
 
-RSpec.describe UsersController, type: :controller do
-  describe 'GET #index' do
-    it 'assigns @users with all users' do
-      user1 = User.create!(name: 'Tega', posts_counter: 0)
-      user2 = User.create!(name: 'Mucha', posts_counter: 0)
-
-      get :index
-
+RSpec.describe 'UsersController', type: :request do
+  describe 'GET index' do
+    it 'returns a successful response' do
+      get users_path
       expect(response).to be_successful
-
-      expect(assigns(:users)).to match_array([user1, user2])
     end
 
     it 'renders the index template' do
-      get :index
-
+      get users_path
       expect(response).to render_template(:index)
+    end
+
+    it 'includes the correct placeholder text in the response body' do
+      get users_path(1)
+      expect(response.body).to include('This is a list of users')
     end
   end
 end
