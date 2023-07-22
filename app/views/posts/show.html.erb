@@ -1,0 +1,35 @@
+<div class="comments-details">
+  <div class="comments-container">
+    <div class="posts-title">
+      <h2>"<%= @post.title %>" by <%= @user.name %></h2>
+    <div class="comments-likes">
+      <span class="comments">Comments: <%= @post.comments.count %>, </span>
+      <span class="likes">Likes: <%= @post.likes.count %></span>
+    </div>
+    </div>
+
+    <p><%= @post.text %></p>
+  </div>
+
+  <div class="like-comment_buttons">
+    <%= form_with url: "/users/#{@post.author.id}/posts/#{@post.id}/likes" do |form| %>
+    <%= form.submit 'Like', class: 'like_button' %>
+    <% end %>
+    <div><%= link_to "Add Comment", new_user_post_comment_path(@post.author.id, @post.id) %></div>
+  </div>
+
+  <div class="comments-container">
+    <% @comments = Post.find(@post.id).comments %>
+    <% if @comments.any? %>
+      <% @comments.includes(:author).each do |comment| %>
+        <div>
+          <span><%= comment.author.name %> : <%= comment.text %></span>
+        </div>
+      <% end %>
+    <% else %>
+      <div class = "no-comment">
+        <span>No comments available yet!!!</span>
+      </div>
+    <% end %>
+  </div>
+</div>
