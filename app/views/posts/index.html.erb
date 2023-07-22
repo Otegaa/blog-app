@@ -50,5 +50,8 @@
         <%= link_to "Pagination", user_post_path(@user, @posts.first) %>
       </button>
     <% end %>
+    <button class="new-post">
+      <%= link_to "Add a new post", new_user_post_path(@user) %>
+    </button>
   </div>
 </div>
