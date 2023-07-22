@@ -1,0 +1,34 @@
+<div class='show-users'>
+  <div class='name-photo'>
+    <div class='img'>
+      <%= image_tag @users.photo %>
+    </div>
+   <div class='name'>
+      <h2><%= @users.name %></h2>
+      <h4>Number of posts: <%= @users.posts.count %></h4>
+    </div>
+  </div>
+  <div class="user-bio">
+    <h3 class="user-bio-heading">Bio</h3>
+    <p> <%= @users.bio %> </p>
+  </div>
+  <% @users.three_most_recent_posts.each do |post| %>
+      <div class="post-info">
+        <p>Post #<%= post.id %></p>
+        <p><%= link_to post.text, user_post_path(post.author, post.id) %></p>
+        <div class="likes-comments">
+          <p>Comments:
+            <%= post.comments.count %></p>
+          <p>Likes:
+            <%= post.likes.count %></p>
+        </div>
+      </div>
+  <% end %>
+  <div class="buttons">
+    <%= button_tag(type: 'button', class: 'see-all-posts') do %>
+        <%= link_to user_posts_path(@users) do %>
+          See all posts
+      <% end %>
+  <% end %>
+  </div>
+</div>
